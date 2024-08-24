@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:technical_test/ui/profile_page.dart';
 
 class HomePage extends StatefulWidget{
   const HomePage({super.key});
@@ -53,15 +54,21 @@ class HomePageState extends State<HomePage>{
           const Icon(Icons.notifications_none, color: Colors.white),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(100)),
-                child: Container(
-                    width: 40,
-                    height: 40,
-                  color: Colors.grey,
-                  padding: const EdgeInsets.all(10),
-                  child: const Center(child: Text("D", style: TextStyle(color: Colors.white, fontSize: 14),))
-                )
+            child: GestureDetector(
+              onTap: (){
+                // navigasi ke halaman profile
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfilePage()));
+              },
+              child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(100)),
+                  child: Container(
+                      width: 40,
+                      height: 40,
+                    color: Colors.grey,
+                    padding: const EdgeInsets.all(10),
+                    child: const Center(child: Text("D", style: TextStyle(color: Colors.white, fontSize: 14),))
+                  )
+              ),
             ),
           ),
         ],
@@ -142,15 +149,15 @@ class HomePageState extends State<HomePage>{
                   mainAxisSpacing: 0,
                   crossAxisCount: 4,
                   children: [
-                    _buildItem(Icons.people, "Urun"),
-                    _buildItem(Icons.mosque, "Pembiayaan\nPorsi Haji"),
-                    _buildItem(Icons.document_scanner_rounded, "Financial Check Up"),
-                    _buildItem(Icons.car_crash, "Asuransi Mobil"),
-                    _buildItem(Icons.house_rounded, "Asuransi Properti"),
+                    _buildItem(Icons.people, "Urun", Colors.deepOrangeAccent),
+                    _buildItem(Icons.mosque, "Pembiayaan\nPorsi Haji", Colors.green),
+                    _buildItem(Icons.document_scanner_rounded, "Financial Check Up", Colors.yellow),
+                    _buildItem(Icons.car_crash, "Asuransi Mobil", Colors.blueGrey),
+                    _buildItem(Icons.house_rounded, "Asuransi Properti", Colors.brown),
                   ],
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
 
                 // Kategori Pilihan
                 Row(
@@ -195,18 +202,18 @@ class HomePageState extends State<HomePage>{
                   mainAxisSpacing: 0,
                   crossAxisCount: 4,
                   children: [
-                    _buildItem(Icons.gamepad, "Hobi"),
-                    _buildItem(Icons.card_giftcard, "Merchandise"),
-                    _buildItem(Icons.heart_broken, "Gaya Hidup\nSehat"),
-                    _buildItem(Icons.chat, "Konseling &\nRohani"),
-                    _buildItem(Icons.self_improvement, "Self Development"),
-                    _buildItem(Icons.credit_card, "Perencanaan\nKeuangan"),
-                    _buildItem(Icons.medical_information, "Konsultasi Media"),
-                    _buildItem(Icons.category, "Lihat Semua"),
+                    _buildItem(Icons.gamepad, "Hobi", Colors.blue),
+                    _buildItem(Icons.card_giftcard, "Merchandise", Colors.lightBlue),
+                    _buildItem(Icons.heart_broken, "Gaya Hidup\nSehat", Colors.red),
+                    _buildItem(Icons.chat, "Konseling &\nRohani", Colors.lightBlueAccent),
+                    _buildItem(Icons.self_improvement, "Self Development", Colors.indigo),
+                    _buildItem(Icons.credit_card, "Perencanaan\nKeuangan", Colors.greenAccent),
+                    _buildItem(Icons.medical_information, "Konsultasi Medis", Colors.lightGreen),
+                    _buildItem(Icons.category, "Lihat Semua", Colors.cyanAccent),
                   ],
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
 
                 // Explore Wellness
                 Row(
@@ -257,13 +264,13 @@ class HomePageState extends State<HomePage>{
     );
   }
 
-  Widget _buildItem(IconData icon, String text) {
+  Widget _buildItem(IconData icon, String text, Color color) {
     return GestureDetector(
       onTap: (){},
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(icon, color: Colors.yellow, size: 36),
+          Icon(icon, color: color, size: 28),
           Text(text, style: const TextStyle(color: Colors.black, fontSize: 12), textAlign: TextAlign.center),
         ],
       ),
