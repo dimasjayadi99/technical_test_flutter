@@ -145,15 +145,15 @@ class HomePageState extends State<HomePage>{
                 GridView.count(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  crossAxisSpacing: 20,
+                  crossAxisSpacing: 0,
                   mainAxisSpacing: 0,
                   crossAxisCount: 4,
                   children: [
                     _buildItem(Icons.people, "Urun", Colors.deepOrangeAccent),
                     _buildItem(Icons.mosque, "Pembiayaan\nPorsi Haji", Colors.green),
-                    _buildItem(Icons.document_scanner_rounded, "Financial Check Up", Colors.yellow),
-                    _buildItem(Icons.car_crash, "Asuransi Mobil", Colors.blueGrey),
-                    _buildItem(Icons.house_rounded, "Asuransi Properti", Colors.brown),
+                    _buildItem(Icons.document_scanner_rounded, "Financial\nCheck Up", Colors.yellow),
+                    _buildItem(Icons.car_crash, "Asuransi\nMobil", Colors.blueGrey),
+                    _buildItem(Icons.house_rounded, "Asuransi\nProperti", Colors.brown),
                   ],
                 ),
 
@@ -198,7 +198,7 @@ class HomePageState extends State<HomePage>{
                 GridView.count(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  crossAxisSpacing: 20,
+                  crossAxisSpacing: 0,
                   mainAxisSpacing: 0,
                   crossAxisCount: 4,
                   children: [
@@ -206,10 +206,10 @@ class HomePageState extends State<HomePage>{
                     _buildItem(Icons.card_giftcard, "Merchandise", Colors.lightBlue),
                     _buildItem(Icons.heart_broken, "Gaya Hidup\nSehat", Colors.red),
                     _buildItem(Icons.chat, "Konseling &\nRohani", Colors.lightBlueAccent),
-                    _buildItem(Icons.self_improvement, "Self Development", Colors.indigo),
+                    _buildItem(Icons.self_improvement, "Self\nDevelopment", Colors.indigo),
                     _buildItem(Icons.credit_card, "Perencanaan\nKeuangan", Colors.greenAccent),
-                    _buildItem(Icons.medical_information, "Konsultasi Medis", Colors.lightGreen),
-                    _buildItem(Icons.category, "Lihat Semua", Colors.cyanAccent),
+                    _buildItem(Icons.medical_information, "Konsultasi\nMedis", Colors.lightGreen),
+                    _buildItem(Icons.category, "Lihat\nSemua", Colors.cyanAccent),
                   ],
                 ),
 
