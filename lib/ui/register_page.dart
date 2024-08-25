@@ -71,32 +71,10 @@ class RegisterPageState extends State<RegisterPage> {
     final email = _emailController.text;
     final nama = _namaController.text;
     final password = _passwordController.text;
-
-    // Show progress dialog
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return const AlertDialog(
-          content: SizedBox(
-            height: 50,
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          ),
-        );
-      },
-    );
-
-    // Delay for 1 second
-    await Future.delayed(const Duration(seconds: 1));
+    // Call setData
+    await setData(email, nama, password);
 
     if(mounted){
-      // Close the progress dialog
-      Navigator.of(context).pop();
-
-      // Call setData
-      await setData(email, nama, password);
 
       // Show success SnackBar
       if(mounted) {

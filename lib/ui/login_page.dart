@@ -30,27 +30,9 @@ class LoginPageState extends State<LoginPage> {
   }
 
   Future<void> _login(String email, String password) async {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return const AlertDialog(
-          content: SizedBox(
-            height: 50,
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          ),
-        );
-      },
-    );
 
     final dbHelper = DatabaseHelper();
     final user = await dbHelper.loginUser(email, password);
-
-    if(mounted) {
-      Navigator.of(context).pop();
-    }
 
     if (user != null) {
       final prefs = await SharedPreferences.getInstance();
@@ -65,7 +47,7 @@ class LoginPageState extends State<LoginPage> {
             backgroundColor: Colors.green,
           ),
         );
-        Navigator.pushReplacementNamed(context, '/home');
+        Navigator.of(context).pop();
       }
 
     } else {

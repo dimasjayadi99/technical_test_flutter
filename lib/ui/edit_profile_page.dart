@@ -790,24 +790,18 @@ class EditProfilePageState extends State<EditProfilePage>{
                         });
                       } else {
                         if (formKey1.currentState!.validate() && formKey2.currentState!.validate() && formKey3.currentState!.validate()) {
-                          showDialog(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (context) => const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          );
-                          await Future.delayed(const Duration(seconds: 1));
-
                           await updateData();
+                          if(mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Data berhasil diedit"),
+                                backgroundColor: Colors.green,
+                              ),
+                            );
 
-                          if (!mounted) return;
-
-                          if (context.mounted) {
+                            // back to login page
                             Navigator.of(context).pop();
-                            Navigator.of(context).pop();
-                            Navigator.of(context).pop();
-                          }
+                            Navigator.of(context).pop();                          }
                         }
                       }
                     }

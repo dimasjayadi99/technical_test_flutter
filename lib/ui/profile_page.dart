@@ -59,7 +59,7 @@ class ProfilePageState extends State<ProfilePage> {
                       await logout();
                       if(context.mounted) {
                         Navigator.of(context).pop();
-                        Navigator.of(context).pop();
+                        Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
                       }
                     },
                     child: const Text("Keluar"),
