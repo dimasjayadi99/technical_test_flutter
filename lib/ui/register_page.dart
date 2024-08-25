@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:technical_test/database/database_helper.dart';
 
-import '../utils/custom_textfiled.dart';
+import '../utils/custom_textfield.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

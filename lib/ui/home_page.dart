@@ -203,12 +203,12 @@ class HomePageState extends State<HomePage>{
                           borderRadius: const BorderRadius.all(Radius.circular(100)),
                         ),
                         child: Row(
-                          mainAxisSize: MainAxisSize.min, // Ensure the Row does not take more width than needed
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             const Text("Wishlist"),
                             const SizedBox(width: 5),
                             Container(
-                              padding: const EdgeInsets.all(5), // Add some padding to the circle
+                              padding: const EdgeInsets.all(5),
                               decoration: const BoxDecoration(
                                 color: Color(0xffF8C20A), // Yellow color
                                 shape: BoxShape.circle, // Circular shape

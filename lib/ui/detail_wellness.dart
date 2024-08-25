@@ -108,7 +108,7 @@ class DetailWellnessPageState extends State<DetailWellnessPage> {
                                   ),
                                 ),
                                 Text(
-                                  data!.wellnessModel.priceWellness.toString(),
+                                  "Rp.${data!.wellnessModel.priceWellness.toString()}",
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
@@ -140,15 +140,6 @@ class DetailWellnessPageState extends State<DetailWellnessPage> {
                         height: 1,
                         thickness: 1,
                         color: Colors.grey,
-                      ),
-                      const SizedBox(height: 10),
-
-                      const Text(
-                        "Rp.20.000",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
                       ),
                       const SizedBox(height: 10),
                       const Row(

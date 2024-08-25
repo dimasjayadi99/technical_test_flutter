@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:technical_test/data/list_data.dart';
 import 'package:technical_test/database/database_helper.dart';
 import 'package:technical_test/utils/drop_down.dart';
-import 'package:technical_test/utils/custom_textfiled.dart';
+import 'package:technical_test/utils/custom_textfield.dart';
 import '../utils/date_picker.dart';
 
 class EditProfilePage extends StatefulWidget{

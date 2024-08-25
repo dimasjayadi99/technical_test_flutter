@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:technical_test/database/database_helper.dart';
 import 'package:technical_test/ui/register_page.dart';
-import 'package:technical_test/utils/custom_textfiled.dart';
+import 'package:technical_test/utils/custom_textfield.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
