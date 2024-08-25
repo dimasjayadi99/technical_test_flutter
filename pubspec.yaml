@@ -39,6 +39,8 @@ dependencies:
   dropdown_button2: ^2.3.9
   image_picker: ^1.0.4
   shared_preferences: ^2.2.1
+  sqflite: ^2.0.0+4
+  path: ^1.8.0
 
 dev_dependencies:
   flutter_test:

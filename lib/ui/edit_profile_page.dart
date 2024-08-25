@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:technical_test/utils/drop_down.dart';
-import 'package:technical_test/widget/custom_textfiled.dart';
+import 'package:technical_test/utils/custom_textfiled.dart';
 
 import '../utils/date_picker.dart';
 
