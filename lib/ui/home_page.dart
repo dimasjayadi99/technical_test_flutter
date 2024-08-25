@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:technical_test/ui/login_page.dart';
 import 'package:technical_test/ui/profile_page.dart';
 
 class HomePage extends StatefulWidget{
@@ -33,6 +35,17 @@ class HomePageState extends State<HomePage>{
     tabText.clear();
   }
 
+  Future<bool> checkData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final email = prefs.getString("email");
+    final nama = prefs.getString("nama");
+
+    if (email != null && email.isNotEmpty && nama != null && nama.isNotEmpty) {
+      return true;
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -55,9 +68,17 @@ class HomePageState extends State<HomePage>{
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: GestureDetector(
-              onTap: (){
-                // navigasi ke halaman profile
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfilePage()));
+              onTap: () async {
+                // cek preference
+                // jika isLogin
+                bool isLoggedIn = await checkData();
+                if(isLoggedIn){
+                  // navigasi ke halaman profile
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfilePage()));
+                }else{
+                  // jika !isLogin
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginPage()));
+                }
               },
               child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(100)),

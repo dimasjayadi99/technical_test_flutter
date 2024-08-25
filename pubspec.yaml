@@ -38,6 +38,7 @@ dependencies:
   package_info_plus: ^5.0.1
   dropdown_button2: ^2.3.9
   image_picker: ^1.0.4
+  shared_preferences: ^2.2.1
 
 dev_dependencies:
   flutter_test:

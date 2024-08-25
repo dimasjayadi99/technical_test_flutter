@@ -13,6 +13,7 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffixWidget;
   final Function()? onTap;
   final String? helperText;
+  final bool? obscure;
 
   const CustomTextField({
     super.key,
@@ -28,6 +29,7 @@ class CustomTextField extends StatelessWidget {
     this.suffixWidget,
     this.onTap,
     this.helperText,
+    this.obscure
   });
 
   @override
@@ -42,6 +44,7 @@ class CustomTextField extends StatelessWidget {
         // initialValue: initValue,
         readOnly: readOnly,
         enabled: enable,
+        obscureText: obscure ?? false,
         decoration: InputDecoration(
           prefixIcon: prefixIcon,
           prefixIconColor: Colors.grey,

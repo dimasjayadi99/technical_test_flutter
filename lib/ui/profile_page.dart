@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:technical_test/ui/edit_profile_page.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -21,7 +22,33 @@ class ProfilePageState extends State<ProfilePage> {
       CardActionProfile(iconAction: Icons.file_copy_rounded, textAction: 'Syarat & Ketentuan',onTapAction: (){}),
       CardActionProfile(iconAction: Icons.help, textAction: 'Bantuan',onTapAction: (){}),
       CardActionProfile(iconAction: Icons.safety_check, textAction: 'Kebijakan Privasi',onTapAction: (){}),
-      CardActionProfile(iconAction: Icons.exit_to_app, textAction: 'Log Out',onTapAction: (){}),
+      CardActionProfile(iconAction: Icons.exit_to_app, textAction: 'Log Out',onTapAction: (){
+        showDialog(
+            context: context,
+            builder: (BuildContext context){
+              return AlertDialog(
+                title: const Text("Logout"),
+                content: const Text("Anda yakin ingin keluar akun?"),
+                actions: [
+                  GestureDetector(
+                      onTap : (){
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("Batal")
+                  ),
+                  GestureDetector(
+                      onTap : () async {
+                        logout();
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("Keluar")
+                  ),
+                ],
+              );
+            }
+        );
+      }),
       CardActionProfile(iconAction: Icons.delete, textAction: 'Hapus Akun',onTapAction: (){}),
     ];
   }
@@ -30,6 +57,11 @@ class ProfilePageState extends State<ProfilePage> {
   void dispose() {
     listActionProfile.clear();
     super.dispose();
+  }
+
+  void logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
   }
 
   @override
