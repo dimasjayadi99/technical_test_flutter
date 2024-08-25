@@ -791,7 +791,7 @@ class EditProfilePageState extends State<EditProfilePage>{
                       } else {
                         if (formKey1.currentState!.validate() && formKey2.currentState!.validate() && formKey3.currentState!.validate()) {
                           await updateData();
-                          if(mounted) {
+                          if(context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Text("Data berhasil diedit"),
