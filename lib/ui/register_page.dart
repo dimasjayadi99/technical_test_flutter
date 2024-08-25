@@ -36,6 +36,34 @@ class RegisterPageState extends State<RegisterPage> {
       'email': email,
       'nama': nama,
       'password': password,
+      'lahir': "",
+      'gender': "",
+      'phone': "",
+      'pendidikan': "",
+      'pernikahan': "",
+      'nik': "",
+      'alamat': "",
+      'provinsi': "",
+      'kabupaten': "",
+      'kecamatan': "",
+      'kelurahan': "",
+      'kode': "",
+      'is_alamat_sama': 0,
+      'alamat_dom': "",
+      'provinsi_dom': "",
+      'kabupaten_dom': "",
+      'kecamatan_dom': "",
+      'kelurahan_dom': "",
+      'nama_perusahaan': "",
+      'alamat_perusahaan': "",
+      'jabatan': "",
+      'lama_kerja': "",
+      'sumber_pendapatan': "",
+      'total_pendapatan': "",
+      'nama_bank': "",
+      'cabang_bank': "",
+      'rekening': "",
+      'pemilik': "",
     });
   }
 
@@ -71,15 +99,17 @@ class RegisterPageState extends State<RegisterPage> {
       await setData(email, nama, password);
 
       // Show success SnackBar
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Akun berhasil dibuat"),
-          backgroundColor: Colors.green,
-        ),
-      );
+      if(mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Akun berhasil dibuat"),
+            backgroundColor: Colors.green,
+          ),
+        );
 
-      // back to login page
-      Navigator.of(context).pop();
+        // back to login page
+        Navigator.of(context).pop();
+      }
     }
   }
 

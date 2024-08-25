@@ -3,13 +3,17 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:technical_test/database/database_helper.dart';
 import 'package:technical_test/utils/drop_down.dart';
 import 'package:technical_test/utils/custom_textfiled.dart';
 
 import '../utils/date_picker.dart';
 
 class EditProfilePage extends StatefulWidget{
-  const EditProfilePage({super.key});
+
+  final Map<String,dynamic>? data;
+
+  const EditProfilePage({super.key, required this.data});
 
   @override
   EditProfilePageState createState() => EditProfilePageState();
@@ -65,6 +69,7 @@ class EditProfilePageState extends State<EditProfilePage>{
   String formatDate(DateTime date) {
     return "${date.day}-${date.month}-${date.year}";
   }
+  Map<String,dynamic>? dataUser = {};
 
   // provinsi
   String? selectedProvinsi;
@@ -324,6 +329,7 @@ class EditProfilePageState extends State<EditProfilePage>{
                 onChanged: (String? value){
                   setState(() {
                     selectedGender = value!;
+                    _genderController.text = value;
                   });
                 },
                 isRequired: true,
@@ -772,8 +778,81 @@ class EditProfilePageState extends State<EditProfilePage>{
   @override
   void initState() {
     super.initState();
-    _emailController.text = "dimas@gmail.com";
+    dataUser = widget.data;
+    if(dataUser!=null) {
+      _namaController.text = dataUser!["nama"] ?? "";
+      _lahirController.text = dataUser!["lahir"] ?? "";
+      selectedGender = dataUser!["gender"] ?? "";
+      _emailController.text = dataUser!["email"] ?? "";
+      _phoneController.text = dataUser!["phone"] ?? "";
+      selectedPendidikan = dataUser!["pendidikan"] ?? "";
+      selectedPernikahan = dataUser!["pernikahan"] ?? "";
+      _nikController.text = dataUser!["nik"] ?? "";
+      _alamatController.text = dataUser!["alamat"] ?? "";
+      selectedProvinsi = dataUser!["provinsi"] ?? "";
+      selectedKabupaten = dataUser!["kabupaten"] ?? "";
+      selectedKecamatan = dataUser!["kecamatan"] ?? "";
+      selectedKelurahan = dataUser!["kelurahan"] ?? "";
+      _kodePosController.text = dataUser!["kode"] ?? "";
+      _alamatDomisiliController.text = dataUser!["alamat_dom"] ?? "";
+      selectedProvinsiDomisili = dataUser!["provinsi_dom"] ?? "";
+      selectedKabupatenDomisili = dataUser!["kabupaten_dom"] ?? "";
+      selectedKecamatanDomisili = dataUser!["kecamatan_dom"] ?? "";
+      selectedKelurahanDomisili = dataUser!["kelurahan_dom"] ?? "";
+      _namaUsahaController.text = dataUser!["nama_perusahaan"] ?? "";
+      _alamatUsahaController.text = dataUser!["alamat_perusahaan"] ?? "";
+      selectedJabatan = dataUser!["jabatan"] ?? "";
+      selectedLamaKerja = dataUser!["lama_kerja"] ?? "";
+      selectedSumberPendapatan = dataUser!["sumber_pendapatan"] ?? "";
+      selectedTotalPendapatan = dataUser!["total_pendapatan"] ?? "";
+      selectedNamaBank = dataUser!["nama_bank"] ?? "";
+      _cabangBankController.text = dataUser!["cabang_bank"] ?? "";
+      _rekeningController.text = dataUser!["rekening"] ?? "";
+      _namaPemilikController.text = dataUser!["pemilik"] ?? "";
+    }
   }
+
+  Future<void> updateData() async {
+    final dbHelper = DatabaseHelper();
+    final data = {
+      'email': _emailController.text,
+      'nama': _namaController.text,
+      'password': dataUser!["password"],
+      'lahir': _lahirController.text,
+      'gender': selectedGender,
+      'phone': _phoneController.text,
+      'pendidikan': selectedPendidikan,
+      'pernikahan': selectedPernikahan,
+      'nik': _nikController.text,
+      'alamat': _alamatController.text,
+      'provinsi': selectedProvinsi,
+      'kabupaten': selectedKabupaten,
+      'kecamatan': selectedKecamatan,
+      'kelurahan': selectedKelurahan,
+      'kode': _kodePosController.text,
+      'is_alamat_sama': 0,
+      'alamat_dom': _alamatDomisiliController.text,
+      'provinsi_dom': selectedProvinsiDomisili,
+      'kabupaten_dom': selectedKabupatenDomisili,
+      'kecamatan_dom': selectedKecamatanDomisili,
+      'kelurahan_dom': selectedKelurahanDomisili,
+      'nama_perusahaan': _namaUsahaController.text,
+      'alamat_perusahaan': _alamatUsahaController.text,
+      'jabatan': selectedJabatan,
+      'lama_kerja': selectedLamaKerja,
+      'sumber_pendapatan': selectedSumberPendapatan,
+      'total_pendapatan': selectedTotalPendapatan,
+      'nama_bank': selectedNamaBank,
+      'cabang_bank': _cabangBankController.text,
+      'rekening': _rekeningController.text,
+      'pemilik': _namaPemilikController.text,
+    };
+
+    if (dataUser != null && dataUser!["id"] != null) {
+      await dbHelper.updateUser(dataUser!["id"], data);
+    }
+  }
+
 
   @override
   void dispose() {
@@ -809,7 +888,7 @@ class EditProfilePageState extends State<EditProfilePage>{
                         currentStep -= 1;
                       });
                 },
-                onStepContinue: (){
+                onStepContinue: () async {
                   final isLast = currentStep == listStep().length - 1;
                   if (currentStep == 0 || currentStep == 1) {
                     if (currentStep == 0 && formKey1.currentState != null && formKey1.currentState!.validate()) {
@@ -829,7 +908,24 @@ class EditProfilePageState extends State<EditProfilePage>{
                         });
                       } else {
                         if (formKey1.currentState!.validate() && formKey2.currentState!.validate() && formKey3.currentState!.validate()) {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) => const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          );
+                          await Future.delayed(const Duration(seconds: 1));
 
+                          await updateData();
+
+                          if (!mounted) return;
+
+                          if (context.mounted) {
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pop();
+                          }
                         }
                       }
                     }

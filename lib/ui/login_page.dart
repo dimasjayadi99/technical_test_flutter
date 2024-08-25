@@ -48,7 +48,9 @@ class LoginPageState extends State<LoginPage> {
     final dbHelper = DatabaseHelper();
     final user = await dbHelper.loginUser(email, password);
 
-    Navigator.of(context).pop();
+    if(mounted) {
+      Navigator.of(context).pop();
+    }
 
     if (user != null) {
       final prefs = await SharedPreferences.getInstance();

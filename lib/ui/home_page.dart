@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:technical_test/ui/login_page.dart';
 import 'package:technical_test/ui/profile_page.dart';
 
 class HomePage extends StatefulWidget{
@@ -75,10 +74,14 @@ class HomePageState extends State<HomePage>{
                 bool isLoggedIn = await checkData();
                 if(isLoggedIn){
                   // navigasi ke halaman profile
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfilePage()));
+                  if(context.mounted) {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfilePage()));
+                  }
                 }else{
                   // jika !isLogin
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginPage()));
+                  if(context.mounted) {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfilePage()));
+                  }
                 }
               },
               child: ClipRRect(

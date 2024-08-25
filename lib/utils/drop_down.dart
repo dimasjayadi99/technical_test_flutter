@@ -10,14 +10,15 @@ class DropDownUtils extends StatefulWidget {
   final Function(String?)? onChanged;
   final bool isRequired;
 
-  const DropDownUtils({super.key,
+  const DropDownUtils({
+    super.key,
     required this.hintText,
     required this.selectedValue,
     required this.controller,
     required this.items,
     this.onChanged,
     this.title,
-    required this.isRequired
+    required this.isRequired,
   });
 
   @override
@@ -41,7 +42,9 @@ class DropDownUtilsStates extends State<DropDownUtils> {
             child: DropdownButtonFormField2<String>(
               isExpanded: true,
               hint: Text(widget.hintText),
-              items: widget.items.map((String item) {
+              items: widget.items
+                  .toSet() // Ensure unique items
+                  .map((String item) {
                 return DropdownMenuItem<String>(
                   value: item,
                   child: Text(
@@ -54,7 +57,7 @@ class DropDownUtilsStates extends State<DropDownUtils> {
                   ),
                 );
               }).toList(),
-              value: widget.selectedValue,
+              value: widget.items.contains(widget.selectedValue) ? widget.selectedValue : null,
               onChanged: widget.onChanged,
               buttonStyleData: ButtonStyleData(
                 height: 60,
@@ -114,7 +117,7 @@ class DropDownUtilsStates extends State<DropDownUtils> {
                 searchController: widget.controller,
               ),
               validator: (String? value) {
-                if(widget.isRequired) {
+                if (widget.isRequired) {
                   if (value == null || value.isEmpty) {
                     return "${widget.hintText} masih kosong!";
                   }
