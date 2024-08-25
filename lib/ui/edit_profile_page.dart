@@ -793,6 +793,7 @@ class EditProfilePageState extends State<EditProfilePage>{
       selectedKabupaten = dataUser!["kabupaten"] ?? "";
       selectedKecamatan = dataUser!["kecamatan"] ?? "";
       selectedKelurahan = dataUser!["kelurahan"] ?? "";
+      checkedValue = dataUser!["is_alamat_sama"] == 1 ? true : false;
       _kodePosController.text = dataUser!["kode"] ?? "";
       _alamatDomisiliController.text = dataUser!["alamat_dom"] ?? "";
       selectedProvinsiDomisili = dataUser!["provinsi_dom"] ?? "";
@@ -830,7 +831,7 @@ class EditProfilePageState extends State<EditProfilePage>{
       'kecamatan': selectedKecamatan,
       'kelurahan': selectedKelurahan,
       'kode': _kodePosController.text,
-      'is_alamat_sama': 0,
+      'is_alamat_sama': checkedValue == true ? 1 : 0,
       'alamat_dom': _alamatDomisiliController.text,
       'provinsi_dom': selectedProvinsiDomisili,
       'kabupaten_dom': selectedKabupatenDomisili,
