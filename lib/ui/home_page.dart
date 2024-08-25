@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:technical_test/bloc/list_willness_bloc.dart';
 import 'package:technical_test/ui/detail_wellness.dart';
+import 'package:technical_test/ui/login_page.dart';
 import 'package:technical_test/ui/profile_page.dart';
 
 import '../widget/card_wellness.dart';
@@ -86,7 +87,7 @@ class HomePageState extends State<HomePage>{
                   }else{
                     // jika !isLogin
                     if(context.mounted) {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfilePage()));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginPage()));
                     }
                   }
                 },
