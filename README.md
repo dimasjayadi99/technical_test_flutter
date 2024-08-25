@@ -1,16 +1,22 @@
-# technical_test
+# Technical-Test-App
 
-Aplikasi untuk kebutuhan technical test Mobil Developer Flutter Fast-8
+Duplikasi aplikasi untuk kebutuhan technical test menggunakan Flutter.
 
-## Getting Started
+## Screenshot
+![Frame 1](https://github.com/user-attachments/assets/04521525-0983-4a6d-ad7d-3b0bd857aefe)
 
-This project is a starting point for a Flutter application.
+## Instalasi
+- Clone repository ini
+- Buka project menggunakan Android Studio
+- Build dan jalankan aplikasi di emulator atau perangkat Android
 
-A few resources to get you started if this is your first Flutter project:
+## Fitur Aplikasi
+- Menu Produk Keuangan
+- Menu Kategori Pilihan
+- Menu Explore Wellness 
+- Login
+- Registrasi
+- Edit Profile
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Credit
+- [Github](https://github.com/dimasjayadi99)
