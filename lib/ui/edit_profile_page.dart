@@ -1,12 +1,11 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:technical_test/data/list_data.dart';
 import 'package:technical_test/database/database_helper.dart';
 import 'package:technical_test/utils/drop_down.dart';
 import 'package:technical_test/utils/custom_textfiled.dart';
-
 import '../utils/date_picker.dart';
 
 class EditProfilePage extends StatefulWidget{
@@ -54,6 +53,7 @@ class EditProfilePageState extends State<EditProfilePage>{
   final TextEditingController _namaUsahaController = TextEditingController();
   final TextEditingController _alamatUsahaController = TextEditingController();
   final TextEditingController _jabatanController = TextEditingController();
+  final TextEditingController _lamaKerjaController = TextEditingController();
   final TextEditingController _sumberPendapatanController = TextEditingController();
   final TextEditingController _totalPendapatanController = TextEditingController();
   final TextEditingController _namaBankController = TextEditingController();
@@ -61,182 +61,30 @@ class EditProfilePageState extends State<EditProfilePage>{
   final TextEditingController _rekeningController = TextEditingController();
   final TextEditingController _namaPemilikController = TextEditingController();
 
-
-  bool checkedValue = true;
-  File? images;
-  String imagePath = "";
-  DateTime? selectedDate;
   String formatDate(DateTime date) {
     return "${date.day}-${date.month}-${date.year}";
   }
   Map<String,dynamic>? dataUser = {};
-
-  // provinsi
+  bool checkedValue = true;
+  File? images;
+  String imagePath = "";
+  DateTime? selectedDate;
   String? selectedProvinsi;
   String? selectedProvinsiDomisili;
-  List<String> listProvinsiName = [
-    "Aceh",
-    "Bali",
-    "Bangka Belitung",
-    "Banten",
-    "Bengkulu",
-    "Gorontalo",
-    "Jakarta",
-    "Jambi",
-    "Jawa Barat",
-    "Jawa Tengah",
-    "Jawa Timur",
-    "Kalimantan Barat",
-    "Kalimantan Tengah",
-    "Kalimantan Timur",
-    "Kalimantan Selatan",
-    "Kalimantan Utara",
-    "Kepulauan Riau",
-    "Lampung",
-    "Maluku",
-    "Maluku Utara",
-    "Nusa Tenggara Barat",
-    "Nusa Tenggara Timur",
-    "Papua",
-    "Papua Barat",
-    "Riau",
-    "Sulawesi Barat",
-    "Sulawesi Selatan",
-    "Sulawesi Tengah",
-    "Sulawesi Tenggara",
-    "Sulawesi Utara",
-    "Sumatera Barat",
-    "Sumatera Selatan",
-    "Sumatera Utara",
-    "Yogyakarta"
-  ];
-
   String? selectedKabupaten;
   String? selectedKabupatenDomisili;
-  List<String> listKabupatenName = [
-    "Aceh",
-    "Bali",
-    "Bangka Belitung",
-    "Banten",
-    "Bengkulu",
-    "Gorontalo",
-    "Jakarta",
-    "Jambi",
-    "Jawa Barat",
-    "Jawa Tengah",
-    "Jawa Timur",
-  ];
-
   String? selectedKecamatan;
   String? selectedKecamatanDomisili;
-  List<String> listKecamatannName = [
-    "Aceh",
-    "Bali",
-    "Bangka Belitung",
-    "Banten",
-    "Bengkulu",
-    "Gorontalo",
-    "Jakarta",
-    "Jambi",
-    "Jawa Barat",
-    "Jawa Tengah",
-    "Jawa Timur",
-  ];
-
   String? selectedKelurahan;
   String? selectedKelurahanDomisili;
-  List<String> listKelurahanName = [
-    "Aceh",
-    "Bali",
-    "Bangka Belitung",
-    "Banten",
-    "Bengkulu",
-    "Gorontalo",
-    "Jakarta",
-    "Jambi",
-    "Jawa Barat",
-    "Jawa Tengah",
-    "Jawa Timur",
-  ];
-
   String? selectedGender;
-  List<String> listGender = [
-    "Laki-laki",
-    "Perempuan",
-  ];
-
   String? selectedPendidikan;
-  List<String> listPendidikan = [
-    "SD",
-    "SMP",
-    "SMA",
-    "D1",
-    "D2",
-    "D3",
-    "S1",
-    "S2",
-    "S3",
-  ];
-
   String? selectedPernikahan;
-  List<String> listPernikahan = [
-    "Sudah Menikah",
-    "Belum Menikah",
-    "Janda",
-    "Duda",
-  ];
-
   String? selectedJabatan;
-  List<String> listJabatan = [
-    "Non-Staff",
-    "Staff",
-    "Supervisor",
-    "Manajer",
-    "Direktur",
-    "Lainnya",
-  ];
-
   String? selectedLamaKerja;
-  final TextEditingController _lamaKerjaController = TextEditingController();
-  List<String> listLamaKerja = [
-    "< 6 Bulan",
-    "6 Bulan - 1 Tahun",
-    "1 - 2 Tahun",
-    "> 2 Tahun",
-  ];
-
   String? selectedSumberPendapatan;
-  List<String> listSumberPendapatan = [
-    "Gaji",
-    "Keuntungan Bisnis",
-    "Bunga Tabungan",
-    "Warisan",
-    "Dana dari orang tua atau anak",
-    "Undian",
-    "Keuntungan Investasi",
-    "Lainnya",
-  ];
-
   String? selectedTotalPendapatan;
-  List<String> listTotalPendapatan = [
-    "< 10 Juta",
-    "10 - 50 Juta",
-    "50 - 100 Juta",
-    "100 - 500 Juta",
-    "500 - 1 Milyar",
-    "> 1 Milyar",
-  ];
-
   String? selectedNamaBank;
-  List<String> listNamaBank = [
-    "Bank BCA",
-    "Bank BRI",
-    "Bank Mandiri",
-    "Bank BTN",
-    "Bank DKI",
-    "Bank BJB",
-    "Bank Danamon",
-  ];
 
   Future imagePickerFromGallery() async{
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -523,7 +371,7 @@ class EditProfilePageState extends State<EditProfilePage>{
                 hintText: "Kecamatan",
                 selectedValue: selectedKecamatan,
                 controller: _kecamatanController,
-                items: listKecamatannName.toSet().toList(),
+                items: listKecamatanName.toSet().toList(),
                 onChanged: (String? value){
                   setState(() {
                     selectedKecamatan = value!;
@@ -610,7 +458,7 @@ class EditProfilePageState extends State<EditProfilePage>{
                       hintText: "Kecamatan",
                       selectedValue: selectedKecamatanDomisili,
                       controller: _kecamatanDomisiliController,
-                      items: listKecamatannName.toSet().toList(),
+                      items: listKecamatanName.toSet().toList(),
                       onChanged: (String? value){
                         setState(() {
                           selectedKecamatanDomisili = value!;
@@ -857,9 +705,42 @@ class EditProfilePageState extends State<EditProfilePage>{
 
   @override
   void dispose() {
+    // dispose step 1
+    _namaController.dispose();
+    _lahirController.dispose();
+    _genderController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    _pendidikanController.dispose();
+    _pernikahanController.dispose();
+    // dispose step 2
+    _nikController.dispose();
+    _alamatController.dispose();
+    _provinsiController.dispose();
+    _provinsiDomisiliController.dispose();
+    _kabupatenController.dispose();
+    _kabupatenDomisiliController.dispose();
+    _kecamatanController.dispose();
+    _kecamatanDomisiliController.dispose();
+    _kelurahanController.dispose();
+    _kelurahanDomisiliController.dispose();
+    _kodePosController.dispose();
+    _alamatDomisiliController.dispose();
+    // dispose step 3
+    _namaUsahaController.dispose();
+    _alamatUsahaController.dispose();
+    _jabatanController.dispose();
+    _sumberPendapatanController.dispose();
+    _totalPendapatanController.dispose();
+    _namaBankController.dispose();
+    _cabangBankController.dispose();
+    _rekeningController.dispose();
+    _namaPemilikController.dispose();
+    // clear step
     listStep().clear();
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
