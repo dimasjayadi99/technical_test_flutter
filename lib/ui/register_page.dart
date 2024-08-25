@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:technical_test/database/database_helper.dart';
 
 import '../utils/custom_textfiled.dart';
@@ -38,21 +37,6 @@ class RegisterPageState extends State<RegisterPage> {
       'nama': nama,
       'password': password,
     });
-
-    // Save instance
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString('email', email);
-    prefs.setBool('isLogin', true);
-  }
-
-  void _showSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        duration: const Duration(seconds: 2),
-        backgroundColor: Colors.green,
-      ),
-    );
   }
 
   Future<void> _register() async {
@@ -82,17 +66,19 @@ class RegisterPageState extends State<RegisterPage> {
     if(mounted){
       // Close the progress dialog
       Navigator.of(context).pop();
-    }
 
-    // Call setData
-    await setData(email, nama, password);
+      // Call setData
+      await setData(email, nama, password);
 
-    // Show success SnackBar
-    _showSnackBar("Akun berhasil dibuat!");
+      // Show success SnackBar
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Akun berhasil dibuat"),
+          backgroundColor: Colors.green,
+        ),
+      );
 
-    if(mounted){
-      // back home page
-      Navigator.of(context).pop();
+      // back to login page
       Navigator.of(context).pop();
     }
   }

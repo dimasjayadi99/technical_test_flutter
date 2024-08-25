@@ -42,4 +42,19 @@ class DatabaseHelper{
     await db.insert('users', data);
   }
 
+  Future<Map<String, dynamic>?> loginUser(String email, String password) async {
+    final db = await database;
+    final result = await db.query(
+      'users',
+      where: 'email = ? AND password = ?',
+      whereArgs: [email, password],
+    );
+
+    if (result.isNotEmpty) {
+      return result.first;
+    } else {
+      return null;
+    }
+  }
+
 }

@@ -37,10 +37,11 @@ class HomePageState extends State<HomePage>{
 
   Future<bool> checkData() async {
     final prefs = await SharedPreferences.getInstance();
+    final id = prefs.getInt("id");
     final email = prefs.getString("email");
     final isLogin = prefs.getBool("isLogin");
 
-    if (email != null && email.isNotEmpty && isLogin != null && isLogin == true) {
+    if (id != null && email != null && email.isNotEmpty && isLogin != null && isLogin == true) {
       return true;
     }
     return false;
